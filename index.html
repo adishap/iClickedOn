@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <title>I clicked on</title>
+    <style>
+      .bigbox {width:300px;height:300px;background:black;cursor:pointer;}
+      #cordinates { list-style-type: none; margin: 0; padding: 0; }
+      #cordinates li { padding: 5px 10px; }
+      #cordinates li:nth-child(odd) { background: #eee; }
+    </style>
+  </head>
+  <body>
+    	<div class="bigbox"></div>
+    	<ul id="cordinates"></ul>
+    	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    	<script>
+	var socket = io();
+	$(document).ready(function(e) {
+    		$('.bigbox').click(function(e) {
+        		socket.emit('cordinates', (e.pageX+ ' , ' + e.pageY));
+			return false;
+    		});    
+	});
+      	socket.on('cordinates', function(cordinates){
+        	$('#cordinates').append($('<li>').text(cordinates));
+      	});
+	</script>
+  </body>
+</html>
