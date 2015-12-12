@@ -9,10 +9,13 @@ app.get('/', function(req, res){
 
 io.on('connection', function(socket){
 	socket.on('cordinates', function(msg){
-		io.emit('cordinates', msg);
+		left = msg.substring(0,msg.indexOf(','));
+		top = msg.substring((msg.indexOf(',') +1 ),(msg.length));
+		console.log(top + left);
+		io.emit('cordinates', {top: top, left: left});
 	});
 });
 
-http.listen(3000, function(){
+http.listen(8080, function(){
 	console.log('listening on *:3000');
 });
