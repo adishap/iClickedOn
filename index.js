@@ -13,7 +13,6 @@ io.on('connection', function(socket){
 		//reading left and top cordinates from the string of format (left,top)
 		left = msg.substring(0,msg.indexOf(','));
 		top = msg.substring((msg.indexOf(',') +1 ),(msg.length));
-
 		io.emit('cordinates', {top: top, left: left});
 	});
 });
